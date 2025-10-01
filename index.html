@@ -5,35 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Marathon Training App - Lịch tập luyện cá nhân cho DQlink">
+    <meta name="theme-color" content="#0a0e27">
+    
     <title>Marathon Training - DQlink</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏃‍♂️</text></svg>">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Training Config - Load đầu tiên -->
     <script src="training-config.js"></script>
+    
+    <!-- JS Modules - Load theo thứ tự -->
+    <script src="js/core.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
 </head>
 <body>
     <div class="container">
+        <!-- Header Section -->
         <div class="header">
             <h1>🏃‍♂️ Marathon Training</h1>
             <p>Lịch tập luyện cá nhân - DQlink</p>
+            
+            <!-- Location & Weather Info -->
             <div class="location-info" id="locationInfo">
                 <span class="mini-spinner"></span>
                 <span>Đang xác định vị trí...</span>
+            </div>
+            
+            <!-- Edit Indicator & Reset Button -->
+            <div class="header-actions">
+                <span class="edit-indicator" id="editIndicator" style="display: none;">
+                    ✏️ Đã chỉnh sửa
+                </span>
+                <button class="reset-btn" id="resetBtn" style="display: none;">
+                    🔄 Khôi phục gốc
+                </button>
             </div>
         </div>
 
         <!-- Tab Navigation -->
         <div class="tab-navigation">
-            <button class="tab-btn active" data-tab="training">
+            <button class="tab-btn active" data-tab="training" aria-label="Training Tab">
                 <span class="tab-icon">🏃‍♂️</span>
                 <span class="tab-label">Training</span>
             </button>
-            <button class="tab-btn" data-tab="swimming">
+            <button class="tab-btn" data-tab="manage" aria-label="Manage Tab">
+                <span class="tab-icon">📅</span>
+                <span class="tab-label">Quản lý</span>
+            </button>
+            <button class="tab-btn" data-tab="swimming" aria-label="Swimming Tab">
                 <span class="tab-icon">🏊‍♂️</span>
                 <span class="tab-label">Swimming</span>
             </button>
         </div>
 
-        <!-- Tab Content -->
-        <div id="trainingTab" class="tab-content active">
+        <!-- Training Tab Content -->
+        <div id="trainingTab" class="tab-content active" role="tabpanel" aria-labelledby="training-tab">
             <div id="mainContent">
                 <div class="loading">
                     <div class="spinner"></div>
@@ -42,7 +74,41 @@
             </div>
         </div>
 
-        <div id="swimmingTab" class="tab-content">
+        <!-- Manage Tab Content -->
+        <div id="manageTab" class="tab-content" role="tabpanel" aria-labelledby="manage-tab">
+            <div id="manageContent">
+                <div class="manage-section">
+                    <div class="manage-header">
+                        <h2>📋 Quản lý lịch tập</h2>
+                        <p>Click vào bất kỳ ngày nào để xem chi tiết hoặc chỉnh sửa</p>
+                    </div>
+                    
+                    <!-- Filter Buttons -->
+                    <div class="manage-filter">
+                        <button class="filter-btn active" data-filter="all">
+                            Tất cả
+                        </button>
+                        <button class="filter-btn" data-filter="upcoming">
+                            Sắp tới
+                        </button>
+                        <button class="filter-btn" data-filter="past">
+                            Đã qua
+                        </button>
+                    </div>
+                    
+                    <!-- Table Container -->
+                    <div id="manageTable">
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            <p>Đang tải dữ liệu...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Swimming Tab Content -->
+        <div id="swimmingTab" class="tab-content" role="tabpanel" aria-labelledby="swimming-tab">
             <div id="swimmingContent">
                 <div class="loading">
                     <div class="spinner"></div>
@@ -51,10 +117,14 @@
             </div>
         </div>
 
+        <!-- Footer -->
         <div class="copyright-footer">
             <div class="copyright-logo">
-				<img src="https://lollidollyart.com/wp-content/uploads/2025/02/logo-mettagram.webp" alt="Mettagram LLC" class="footer-logo-img">
-			</div>
+                <img src="https://lollidollyart.com/wp-content/uploads/2025/02/logo-mettagram.webp" 
+                     alt="Mettagram LLC Logo" 
+                     class="footer-logo-img"
+                     loading="lazy">
+            </div>
             <div class="copyright-text">
                 © 2025 Mettagram LLC. All rights reserved.<br>
                 Marathon Training System - Version 1.0<br>
@@ -66,6 +136,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Modals will be dynamically inserted here by JavaScript -->
 </body>
 </html>
